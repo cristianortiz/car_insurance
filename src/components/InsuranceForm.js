@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { getYearDifference } from "../helper";
+import { getYearDifference, calculateBrandPaid, getPlanType } from "../helper";
 
 //styled div to form fields
 const FormDiv = styled.div`
@@ -54,8 +54,8 @@ const Error = styled.div`
 `;
 
 //begin of the component
-const InsuranceForm = () => {
-  //form data objetc State
+const InsuranceForm = ({ handleRecap }) => {
+  //form data object local State hook
   const [data, HandleData] = useState({
     brand: "",
     year: "",
@@ -90,10 +90,25 @@ const InsuranceForm = () => {
 
     //calculate car's age to apply 3% of depreciation for every year, year base is 2000
     const carAge = getYearDifference(year);
-    let yearBaseDep = 2000;
+    let insuranceQuote = 2000; //base year to calculate depreciation
 
-    //calculate 3 %  for year on depreciation, starting for the year 2000
-    yearBaseDep -= (carAge * 3 * carAge) / 100;
+    //calculate 3 %  for year on depreciation, starting for the year 2000, and add to insurance quote value
+    insuranceQuote -= (carAge * 3 * insuranceQuote) / 100;
+
+    //calculate increment paid according to the ar brand
+    insuranceQuote = calculateBrandPaid(brand) * insuranceQuote;
+
+    //plan type quote increment
+    const planIncrement = getPlanType(plan);
+
+    insuranceQuote = parseFloat(planIncrement * insuranceQuote).toFixed(2);
+    console.log(insuranceQuote);
+
+    //passing the quote data and the quote value to app useState hook
+    handleRecap({
+      insuranceQuote: insuranceQuote,
+      data,
+    });
   };
 
   return (
