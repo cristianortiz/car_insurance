@@ -18,7 +18,7 @@ const Select = styled.select`
   width: 100%;
   padding: 1rem;
   border: 1px solid #e1e1e1;
-  -webkit-appearance: none; //replace the default browser select style
+  -webkit-appearance: none; //replace the default browser of input select style
 `;
 
 const InputRadio = styled.input`
@@ -52,6 +52,8 @@ const Error = styled.div`
   text-align: center;
   margin: 0 0 2rem 0;
 `;
+
+//begin of the component
 const InsuranceForm = () => {
   //form data objetc State
   const [data, HandleData] = useState({
@@ -63,7 +65,7 @@ const InsuranceForm = () => {
   //extracting State values from data State
   const { brand, year, plan } = data;
 
-  //read the data form (when user submit the form ) and put them in the data State
+  //read the data form (when user submit it ) and put them in the data State
   const getFormData = (e) => {
     HandleData({
       ...data, //copy of the data state
