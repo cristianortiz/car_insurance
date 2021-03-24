@@ -5,7 +5,12 @@ Is a a very simple app design to study the styled component in React, the focus 
 
 ## Highlights
 
-### Styled Component
+### Styled Components
+
+-app : Main component
+-components/Insuranceform: styled component to show the form of insurance quote, validate and process submit, useState hooks to keep track of the input values of the form, in this component also is calculated the value of the insuracen car
+-Recap, Result: styled component to show a summary of the option selected by the user in the form and the calculated value of the insurance
+-spinner: vendor component to show an animation while the calculations is made after submit the form
 
 ### UseState Hooks
 
