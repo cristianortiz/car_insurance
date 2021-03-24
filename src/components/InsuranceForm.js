@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { getYearDifference, calculateBrandPaid, getPlanType } from "../helper";
+import PropTypes from "prop-types";
 
 //styled div to form fields
 const FormDiv = styled.div`
@@ -54,7 +55,7 @@ const Error = styled.div`
 `;
 
 //begin of the component
-const InsuranceForm = ({ handleRecap }) => {
+const InsuranceForm = ({ handleRecap, handleLoad }) => {
   //form data object local State hook
   const [data, HandleData] = useState({
     brand: "",
@@ -102,13 +103,21 @@ const InsuranceForm = ({ handleRecap }) => {
     const planIncrement = getPlanType(plan);
 
     insuranceQuote = parseFloat(planIncrement * insuranceQuote).toFixed(2);
-    console.log(insuranceQuote);
+    //show spinner
+    handleLoad(true);
+
+    //for 3 secs show the spinner an then hide it again and call handleRecap to show Recap component
+    setTimeout(() => {
+      //hide the spinner
+      handleLoad(false);
+      //pass the quote data to App component to show it
+      handleRecap({
+        insuranceQuote: Number(insuranceQuote), //cast to number for propTypes check
+        data,
+      });
+    }, 2000);
 
     //passing the quote data and the quote value to app useState hook
-    handleRecap({
-      insuranceQuote: insuranceQuote,
-      data,
-    });
   };
 
   return (
@@ -163,5 +172,9 @@ const InsuranceForm = ({ handleRecap }) => {
     </form>
   );
 };
-
+//useState functions props added from app component
+InsuranceForm.propTypes = {
+  handleLoad: PropTypes.func.isRequired,
+  handleRecap: PropTypes.func.isRequired,
+};
 export default InsuranceForm;

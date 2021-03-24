@@ -13,20 +13,20 @@ body {
 }
 ul {
   list-style: none;
-  padding: none;
-  margin: none;
+  padding: 0;
+  margin: 0;
 }
 span.resultado {
   position: relative;
   width: 100%;
 }
-.resultado-enter {
+.insuranceText-enter {
   transition: 0.5s;
 }
-.resultado-enter.resultado-enter-active {
+.insuranceText-enter.insuranceText-enter-active {
   transform: translateY(0%);
 }
-.resultado-exit {
+.insuranceText-exit {
   transform: translateY(0);
   transition: 0.5s;
   position: absolute;
@@ -34,7 +34,7 @@ span.resultado {
   bottom: 0;
   right: 0;
 }
-.resultado-exit-active {
+.insuranceText-exit-active {
   opacity: 0;
   transform: translateY(-10%);
 }

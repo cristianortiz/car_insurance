@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 
 //replace the <header> tag whit this css styled component and then is used  like JSX react component way
 const HeaderContainer = styled.header`
@@ -21,6 +22,11 @@ const Header = ({ title }) => {
       <HeaderText>{title}</HeaderText>
     </HeaderContainer>
   );
+};
+
+//string prop passed from app component
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
 export default Header;
